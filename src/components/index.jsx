@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import * as actions from './../actions';
 
 import MessSpecForm from './msform';
+import MessSpecList from './mslist';
 
-const App = ({ addMessSpec }) => {
-   let name,
-       spec;
-
+const App = ({ messSpecs, addMessSpec }) => {
    return (
       <div>
          <h1>Message Specifications</h1>
          <MessSpecForm submitHandler={addMessSpec} />
+         <MessSpecList data={messSpecs} />
       </div>
    );
 };
