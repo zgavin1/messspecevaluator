@@ -6,13 +6,11 @@ const messSpecs = (state = {}, action) => {
          return {
             ...state,
             [action.id]: {
-               name: action.name,
-               spec: action.spec,
-               id: action.id
+               id: action.id,
+               ms: action.ms
             }
          };
       case "REMOVE_MESS_SPEC":
-         debugger
          let nextState = Object.assign({}, state);
          delete nextState[action.id];
          return nextState;

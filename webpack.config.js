@@ -1,7 +1,7 @@
 var path = require("path");
 module.exports = {
   context: __dirname,
-  entry: "./src/app.jsx",
+  entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",

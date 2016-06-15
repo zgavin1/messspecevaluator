@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const MessSpecForm = ({ submitHandler }) => {
+import { addMessSpec } from './../actions';
+
+let AddMessSpec = ({ dispatch }) => {
    let name,
        spec;
 
@@ -8,7 +11,7 @@ const MessSpecForm = ({ submitHandler }) => {
       <form id="mess-spec-builder"
          onSubmit={(e) => {
             e.preventDefault();
-            submitHandler(name.value, spec.value);
+            dispatch(addMessSpec(name.value, spec.value));
             document.getElementById('mess-spec-builder').reset();
          }} >
          <label htmlFor="name">Name</label>
@@ -36,4 +39,6 @@ const MessSpecForm = ({ submitHandler }) => {
    );
 }
 
-export default MessSpecForm;
+AddMessSpec = connect()(AddMessSpec);
+
+export default AddMessSpec;

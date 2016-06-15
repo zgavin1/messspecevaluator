@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import app from './reducers';
-import App from './components/index.jsx';
+import App from './components/app.jsx';
 
 render(
    <Provider store={createStore(app)}>
