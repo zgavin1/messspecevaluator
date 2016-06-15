@@ -1,13 +1,14 @@
 import { v4 } from 'node-uuid';
-import MessageSpecification from './../api';
+// import MessageSpecification from './../api';
 
 export const addMessSpec = (name, spec) => ({
    type: "ADD_MESS_SPEC",
    id: v4(),
-   ms: new MessageSpecification(name, spec)
+   name,
+   spec
 });
 
-export const removeMessSpec = (id) => ({
+export const removeMessSpec = (name) => ({
    type: "REMOVE_MESS_SPEC",
-   id
+   name
 });

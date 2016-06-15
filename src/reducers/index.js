@@ -5,35 +5,21 @@ const messSpecs = (state = {}, action) => {
       case "ADD_MESS_SPEC":
          return {
             ...state,
-            [action.id]: {
+            [action.name]: {
                id: action.id,
-               ms: action.ms
+               name: action.name,
+               spec: action.spec
             }
          };
       case "REMOVE_MESS_SPEC":
          let nextState = Object.assign({}, state);
-         delete nextState[action.id];
+         delete nextState[action.name];
          return nextState;
       default: 
          return state;
    }
 }
 
-const ids = (state = [], action) => {
-   switch (action.type) {
-      case "ADD_MESS_SPEC":
-         return [
-            ...state,
-            action.id
-         ];
-      case "REMOVE_MESS_SPEC":
-         return state.filter(id => id !== action.id);
-      default:
-         return state;
-   }
-}
-
 export default combineReducers({
-   messSpecs,
-   ids
+   messSpecs
 })
