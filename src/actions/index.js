@@ -12,3 +12,17 @@ export const removeMessSpec = (name) => ({
    type: "REMOVE_MESS_SPEC",
    name
 });
+
+export const editMessSpec = (name) => ({
+   type: "OPEN_EDIT_MESS_SPEC",
+   name
+})
+
+export const updateMessSpec = (data) => {
+   return {
+      type: "UPDATE_MESS_SPEC",
+      prevName: data.prevName,
+      name: data.name,
+      spec: data.spec
+   }
+}

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const MessSpec = ({ data, closeMessSpec, runMessSpec }) => {
+const MessSpec = ({ data, close, run, edit }) => {
    return (
       <li>
          <span>{data.name} </span>
-         <button onClick={runMessSpec}> Run Specification </button>
-         <button onClick={closeMessSpec}> Remove Message Specification </button>
+         <button onClick={run}>Run</button>
+         <button onClick={edit}>Edit</button>
+         <button onClick={close}>Remove</button>
       </li>
    );
 };
