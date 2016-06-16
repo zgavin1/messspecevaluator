@@ -19,8 +19,10 @@ function parseForMS (string) {
          x += "<ms>"+name+"</ms>";
       }
       // console.log(x);
+      debugger
       return x + parseForMS(string.slice(closeMS+5)); 
    }
+   debugger
    return string;
 }
 

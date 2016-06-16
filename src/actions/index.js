@@ -18,11 +18,14 @@ export const editMessSpec = (name) => ({
    name
 })
 
-export const updateMessSpec = (data) => {
-   return {
-      type: "UPDATE_MESS_SPEC",
-      prevName: data.prevName,
-      name: data.name,
-      spec: data.spec
-   }
-}
+export const updateMessSpec = (data) => ({
+   type: "UPDATE_MESS_SPEC",
+   prevName: data.prevName,
+   name: data.name,
+   spec: data.spec
+})
+
+export const receiveSpecString = (string) => ({
+   type: "RECEIVE_SPEC_STRING",
+   string
+})

@@ -61,6 +61,17 @@ const messSpecs = (state = {}, action) => {
    }
 }
 
+const output = (state= "", action) => {
+   debugger
+   switch (action.type) {
+      case "RECEIVE_SPEC_STRING":
+         return action.string;
+      default:
+         return state;
+   }
+}
+
 export default combineReducers({
-   messSpecs
+   messSpecs,
+   output
 })

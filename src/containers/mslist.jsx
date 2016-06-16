@@ -19,18 +19,24 @@ class MessSpecsContainer extends Component {
             closeMS = spec.indexOf("</ms>");
 
       if (openMS >= 0 && closeMS >=0) {
+         // debugger
          subSpecName = spec.slice(openMS + 4, closeMS);
-      }
-      if (openMS !== -1) {
+      // }
+      // if (openMS !== -1) {
          let x = spec.slice(0, openMS);
          if (messSpecs[subSpecName]) {
             x += this.parseSpec(messSpecs[subSpecName].spec);
          } else {
             x += "<ms>"+subSpecName+"</ms>";
          }
-         console.log(x + this.parseSpec(spec.slice(closeMS+5))); 
+         // debugger
+         // console.log(x + this.parseSpec(spec.slice(closeMS+5)));
+         return x + this.parseSpec(spec.slice(closeMS+5)); 
       }
-      console.log(spec);
+      // debugger
+      // getting errors due to console.log rather than return;
+      // console.log(spec);
+      return spec;
    }
 
    render() {
@@ -47,6 +53,7 @@ const MessSpecList = ({
    data,
    removeMessSpec,
    runMessSpec,
+   receiveSpecString,
    editMessSpec,
    updateMessSpec
 }) => {
@@ -71,7 +78,7 @@ const MessSpecList = ({
                    key={ms.id}
                    data={ms}
                    close={() => closeMessSpec(ms.name)}
-                   run={() => runMessSpec(ms.spec)}
+                   run={() => receiveSpecString(runMessSpec(ms.spec))}
                    edit={() => editMessSpec(ms.name)} />
                )
             })}
