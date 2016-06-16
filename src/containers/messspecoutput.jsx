@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import OutputDisplay from './../components/outputdisplay';
+
 class MessSpecOutput extends Component {
    render() {
       const { output } = this.props;
       return (
-         <h1>{output}</h1>
+         <OutputDisplay >
+            { output }
+         </OutputDisplay>
       );
    }
 }

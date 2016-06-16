@@ -77,7 +77,7 @@ const MessSpecList = ({
                   <MessSpec
                    key={ms.id}
                    data={ms}
-                   close={() => closeMessSpec(ms.name)}
+                   close={() => removeMessSpec(ms.name)}
                    run={() => receiveSpecString(runMessSpec(ms.spec))}
                    edit={() => editMessSpec(ms.name)} />
                )
