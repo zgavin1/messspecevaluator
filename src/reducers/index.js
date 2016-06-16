@@ -61,8 +61,7 @@ const messSpecs = (state = {}, action) => {
    }
 }
 
-const output = (state= "", action) => {
-   debugger
+const output = (state = "", action) => {
    switch (action.type) {
       case "RECEIVE_SPEC_STRING":
          return action.string;
