@@ -5,45 +5,53 @@ import * as actions from './../actions';
 import MessSpec from './../components/messspec';
 import MessSpecEdit from './../components/messspecedit';
 
+// ms(ms(name))
+let ms = (specs, string, depth = 0) => {
+   if (!string) return "";
+   if (depth >= 20) return string;
+   if (specs[string]) {
+      return ms(specs, specs[string].spec, depth+1);
+   }
+
+   const openMsIdx = string.indexOf("ms(");
+   if (openMsIdx >= 0) {
+      const prefix = string.slice(0, openMsIdx);
+      let pCount = 1,
+         evalString = "",
+         idx = openMsIdx + 3;
+
+      while (idx < string.length) {
+         let char = string[idx];
+         if (char === "(") {
+            pCount++;
+         } else if (char === ")") {
+            pCount--;
+            if (pCount === 0) {
+               idx++;
+               break;
+            }
+         }
+
+         evalString += char;
+         idx++;
+      }
+      return prefix + ms(specs, evalString, depth+1) + ms(specs, string.slice(idx), depth)
+   }
+
+   return string
+}
+
 class MessSpecsContainer extends Component {
 
-   parseSpec(spec) {
-      // TODO: Need to handle edge cases
-      //  nested specs: <ms><ms>specname</ms></ms>
-      //  fake specs: <ms>specname doesn't exist</ms>
-      //  how to validate formatting: <ms> </ms> spec name </ms> 
-
-      let subSpecName = "";
-      const messSpecs = this.props.data,
-            openMS = spec.indexOf("<ms>"),
-            closeMS = spec.indexOf("</ms>");
-
-      if (openMS >= 0 && closeMS >=0) {
-         // debugger
-         subSpecName = spec.slice(openMS + 4, closeMS);
-      // }
-      // if (openMS !== -1) {
-         let x = spec.slice(0, openMS);
-         if (messSpecs[subSpecName]) {
-            x += this.parseSpec(messSpecs[subSpecName].spec);
-         } else {
-            x += "<ms>"+subSpecName+"</ms>";
-         }
-         // debugger
-         // console.log(x + this.parseSpec(spec.slice(closeMS+5)));
-         return x + this.parseSpec(spec.slice(closeMS+5)); 
-      }
-      // debugger
-      // getting errors due to console.log rather than return;
-      // console.log(spec);
-      return spec;
+   parseMS(string) {
+      return ms(this.props.data, string);
    }
 
    render() {
       // const { data, removeMessSpec, editMessSpec } = this.props;
       return (
          <MessSpecList
-          runMessSpec={this.parseSpec.bind(this)}
+          runMessSpec={this.parseMS.bind(this)}
           { ...this.props } />
       );
    }
