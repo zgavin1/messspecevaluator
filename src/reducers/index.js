@@ -19,12 +19,15 @@ const messSpec = (state, action) => {
             editing: true
          }
       case "UPDATE_MESS_SPEC":
-         return {
-            ...state,
-            name: action.name,
-            spec: action.spec,
-            editing: false
+         if (state.editing) {
+            return {
+               ...state,
+               name: action.name,
+               spec: action.spec,
+               editing: false
+            }
          }
+         return state;
       default:
          return state;
    }
