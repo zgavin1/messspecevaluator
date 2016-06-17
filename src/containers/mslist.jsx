@@ -13,6 +13,7 @@ import MessSpecEdit from './../components/messspecedit';
  * counter. Returns either the string or
  * calls itself recursively to find nested specs.
  */
+ // ms(new)new
 let ms = (specs, string, depth = 0) => {
    // if string is empty, immediately return an empty string
    if (!string) return "";
@@ -50,11 +51,20 @@ let ms = (specs, string, depth = 0) => {
          evalString += char;
          idx++;
       }
+
+      // If the substring starting after the closing
+      // parens contains another Message Spec syntax
+      // then I want to call the ms function recursively
+      // on the substring. If not, I just want the substring itself.
+      let suffix = string.slice(idx);
+      if (suffix.includes("ms(")) {
+         suffix = ms(specs, string.slice(idx), depth);
+      }
+
       // return string before opening ms tag
       // + recursive ms() passing specs data, nested string and 
-      // new depth + recursive ms() passing specs data,
-      // nested string and new depth
-      return prefix + ms(specs, evalString, depth+1) + ms(specs, string.slice(idx), depth)
+      // new depth + prebuilt suffix
+      return prefix + ms(specs, evalString, depth+1) + suffix;
    }
    // otherwise, if we don't find 
    // an opening ms tag at all

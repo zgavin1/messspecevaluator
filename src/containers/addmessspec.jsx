@@ -29,12 +29,13 @@ let AddMessSpec = ({ dispatch, messSpecs }) => {
             onSubmit={(e) => {
                e.preventDefault();
                // If no Message Specification exists with this name
+               // and the name contains at least one non-whitespace character
                // proceed with dispatching the addMessSpec action.
-               if (!messSpecs[name.value]) {
+               if (!messSpecs[name.value] && name.value.replace(/ /g,'') !== "") {
                   dispatch(addMessSpec(name.value, spec.value));
                   document.getElementById('mess-spec-builder').reset();
                } else {
-                  alert("You cannot have Message Specifications with the same name! Delete the existing Message Specification with this name, or rename this one.")
+                  alert("That name is either taken or just an empty string! Choose another, or the delete the existing Message Specification with that name.")
                }
             }} >
             <label htmlFor="name">Name: </label>
