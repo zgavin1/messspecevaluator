@@ -1,5 +1,7 @@
 import React from 'react';
 
+// "Dumb" presnetation component to represent
+// a single Message Specification
 const MessSpec = ({ data, close, run, edit }) => {
    return (
       <li>

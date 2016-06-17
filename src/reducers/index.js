@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-// helper reducer
+// Helper reducer for Message Specifications
 const messSpec = (state, action) => {
    switch (action.type) {
       case "ADD_MESS_SPEC":
@@ -33,10 +33,13 @@ const messSpec = (state, action) => {
    }
 }
 
-// main reducer
+// Main reducer for Message Specifications.
 const messSpecs = (state = {}, action) => {
    switch (action.type) {
       case "ADD_MESS_SPEC":
+         if (state[action.name]) {
+            return state;
+         }
       case "OPEN_EDIT_MESS_SPEC":
          return {
             ...state,
@@ -64,6 +67,7 @@ const messSpecs = (state = {}, action) => {
    }
 }
 
+// Reducer for the output of running a Message Specification.
 const output = (state = "", action) => {
    switch (action.type) {
       case "RECEIVE_SPEC_STRING":

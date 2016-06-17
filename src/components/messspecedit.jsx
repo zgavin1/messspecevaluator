@@ -1,5 +1,7 @@
 import React from 'react';
 
+// "Semi-Dumb" Presentational component for
+// Message Specifications being edited.
 const MessSpecEdit = ({ data, update }) => {
    let newName,
        newSpec;

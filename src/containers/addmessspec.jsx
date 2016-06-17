@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 
 import { addMessSpec } from './../actions';
 
-let AddMessSpec = ({ dispatch }) => {
+/*
+* Container component for adding Message Specifications.
+* Definitely bad practice to have a component with both
+* logic and presentation.
+* TODO: Refactor with LinkedState-Mixin rather than ref props
+*/ 
+let AddMessSpec = ({ dispatch, messSpecs }) => {
    let name,
        spec;
 
@@ -22,8 +28,14 @@ let AddMessSpec = ({ dispatch }) => {
          <form id="mess-spec-builder"
             onSubmit={(e) => {
                e.preventDefault();
-               dispatch(addMessSpec(name.value, spec.value));
-               document.getElementById('mess-spec-builder').reset();
+               // If no Message Specification exists with this name
+               // proceed with dispatching the addMessSpec action.
+               if (!messSpecs[name.value]) {
+                  dispatch(addMessSpec(name.value, spec.value));
+                  document.getElementById('mess-spec-builder').reset();
+               } else {
+                  alert("You cannot have Message Specifications with the same name! Delete the existing Message Specification with this name, or rename this one.")
+               }
             }} >
             <label htmlFor="name">Name: </label>
             <input
@@ -51,6 +63,10 @@ let AddMessSpec = ({ dispatch }) => {
    );
 }
 
-AddMessSpec = connect()(AddMessSpec);
+const mapStateToProps = (state) => ({
+   messSpecs: state.messSpecs
+})
+
+AddMessSpec = connect(mapStateToProps)(AddMessSpec);
 
 export default AddMessSpec;
