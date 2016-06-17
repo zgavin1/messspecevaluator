@@ -47,11 +47,11 @@ let AddMessSpec = ({ dispatch, messSpecs }) => {
                   name=node;
                }} />
             <br/>
+            <br/>
             <label htmlFor="spec">Spec: </label>
-            <input
+            <textarea
                id="spec"
                name="spec"
-               type="text"
                ref={node=>{
                   spec=node;
                }} />
